@@ -24,8 +24,12 @@ connectDB();
 app.get("/", (req, res) => {
     res.send("API is running...");
 });
- 
+
 app.use("/api/v1/auth", userRoutes);
 app.use("/api/v1/quotation", quotationRoutes);
 
-export default app;
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});

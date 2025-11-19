@@ -15,8 +15,8 @@ app.use(
     cors({
         origin: [  
             'http://localhost:5173',
-            ''
-        ],
+            'https://dynamic-quotation-system-client.vercel.app/'
+        ],  
         credentials: true,
         methods: ['GET', "POST", "PUT", "DELETE"],
         allowedHeaders: ["content-type", "Authorization"],  
@@ -28,7 +28,7 @@ app.use(cookieParser());
 // Database Connect
 connectDB();  
 
-// Basic Route
+// Basic Route  
 app.get("/", (req, res) => {
     res.send("API is running...");
 });

@@ -9,24 +9,25 @@ import cookieParser from "cookie-parser";
 dotenv.config();
 
 const app = express();
- 
+
 // Middlewares
 app.use(
     cors({
-        origin: [  
+        origin: [
             'http://localhost:5173',
-            'https://dynamic-quotation-system-client.vercel.app/'
-        ],  
+            'https://dynamic-quotation-system-client.vercel.app/',
+            '*'
+        ],
         credentials: true,
         methods: ['GET', "POST", "PUT", "DELETE"],
-        allowedHeaders: ["content-type", "Authorization"],  
+        allowedHeaders: ["content-type", "Authorization"],
     })
 )
 app.use(express.json());
 app.use(cookieParser());
 
 // Database Connect
-connectDB();  
+connectDB();
 
 // Basic Route  
 app.get("/", (req, res) => {

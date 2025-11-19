@@ -84,3 +84,22 @@ export const getUserProfile = asyncHandler(async (req, res) => {
         .status(200)
         .json(new Apiresponse(200, user, "Profile fetched successfully"));
 });
+
+
+export const getAllUsers = asyncHandler(async (req, res) => {
+    const users = await User.find().select("-password");
+
+    if (!users || users.length === 0) {
+        throw new ApiError(404, "No users found");
+    }
+
+    return res
+        .status(200)
+        .json(
+            new Apiresponse(
+                200,
+                users,
+                "All users fetched successfully"
+            )
+        );
+});

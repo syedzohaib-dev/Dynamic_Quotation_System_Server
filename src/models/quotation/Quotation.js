@@ -12,17 +12,21 @@ const quotationSchema = new mongoose.Schema(
             postalCode: { type: String, required: true },
             email: { type: String, required: true },
             phoneNumber: { type: String, required: true },
-            specialInstruction: { type: String, default: "" }
+            specialNote: { type: String, default: "" }
         },
 
         orderSources: {
             invoiceNumber: { type: String, required: true },
-            dateIssued: { type: String, required: true },
+            orderSources: { type: String, required: true },
+            orderDate: { type: String, required: true },
+            deliveryAddress: { type: String, required: true },
+            city: { type: String, required: true },
+            phoneNumber: { type: String, required: true },
+            issueDate: { type: String, required: true },
             dueDate: { type: String, required: true },
-            projectDescription: { type: String, required: true },
-            paymentType: { type: String, required: true },
-            bankName: { type: String, default: "" },
-            accountNumber: { type: String, default: "" }
+            paymentMethod: { type: String, required: true },
+            advance: { type: Number, default: "" },
+            termsAndCondition: { type: String, default: "" }
         },
 
         products: {
@@ -35,9 +39,7 @@ const quotationSchema = new mongoose.Schema(
             totalDiscountApplied: { type: Number, required: true },
             totalTaxApplied: { type: Number, required: true },
             grandTotal: { type: Number, required: true },
-            termsAndConditions: { type: String, required: true }
         },
-
         createdBy: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "User",

@@ -6,10 +6,10 @@ import userRoutes from "./src/routes/auth/userRoutes.js";
 import quotationRoutes from "./src/routes/quotation/quotationRoutes.js";
 import cookieParser from "cookie-parser";
 
-dotenv.config();
+dotenv.config();    
 
 const app = express();
-
+ 
 app.use(
     cors({
         origin: "*",

@@ -51,7 +51,7 @@ export const createQuotation = asyncHandler(async (req, res) => {
 
 export const getAllQuotations = asyncHandler(async (req, res) => {
     const userId = req.user.id;
-    console.log(userId)
+    // console.log(userId)
     if (!userId) {
         throw new ApiError(401, "Unauthorized user");
     }
@@ -59,10 +59,41 @@ export const getAllQuotations = asyncHandler(async (req, res) => {
     // Fetch all quotations created by this user
     const quotations = await Quotation.find({ createdBy: userId })
         .sort({ createdAt: -1 });
-    console.log(quotations)
+    // console.log(quotations)
     return res
         .status(200)
         .json(
             new Apiresponse(200, quotations, "Quotations fetched successfully")
+        );
+});
+
+export const getQuotationById = asyncHandler(async (req, res) => {
+    const quotationId = req.params.id;
+    const userId = req.user.id;
+    console.log(quotationId, userId)
+
+    if (!quotationId) {
+        throw new ApiError(400, "Quotation ID is required");
+    }
+
+    if (!userId) {
+        throw new ApiError(401, "Unauthorized user");
+    }
+
+    // Find quotation by id and createdBy (user must own it)
+    const quotation = await Quotation.findById(quotationId);
+ 
+    if (!quotation) {
+        throw new ApiError(404, "Quotation not found");
+    }
+
+    return res
+        .status(200) 
+        .json(
+            new Apiresponse(
+                200,
+                quotation,
+                "Quotation fetched successfully"
+            )
         );
 });
